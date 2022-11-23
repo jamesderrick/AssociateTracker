@@ -37,6 +37,7 @@ namespace AssociateTracker.Controllers
             {
                 _db.Associates.Add(associate);
                 _db.SaveChanges();
+                TempData["success"] = "Associate added successfully";
                 return RedirectToAction("Index");
             }
             return View(associate);
@@ -64,6 +65,7 @@ namespace AssociateTracker.Controllers
             {
                 _db.Associates.Update(associate);
                 _db.SaveChanges();
+                TempData["success"] = "Associate updated successfully";
                 return RedirectToAction("Index");
             }
             return View(associate);
@@ -95,6 +97,7 @@ namespace AssociateTracker.Controllers
 
             _db.Associates.Remove(associate);
             _db.SaveChanges();
+            TempData["success"] = "Associate deleted successfully";
             return RedirectToAction("Index");
          
         }
