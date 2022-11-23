@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using AssociateTracker.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,16 @@ namespace AssociateTracker.Data
 		}
 
 		public DbSet<Associate> Associates { get; set; }
-	}
+        public DbSet<Placement> Placements { get; set; }
+        public DbSet<Company> Companies { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Company>()
+                .Property(c => c.IsActive)
+                .HasDefaultValue(true);
+        }
+    }
+    
 }
 

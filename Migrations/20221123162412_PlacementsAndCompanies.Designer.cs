@@ -4,6 +4,7 @@ using AssociateTracker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AssociateTracker.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221123162412_PlacementsAndCompanies")]
+    partial class PlacementsAndCompanies
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,12 +41,7 @@ namespace AssociateTracker.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PlacementId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PlacementId");
 
                     b.ToTable("Associates");
                 });
@@ -92,15 +90,6 @@ namespace AssociateTracker.Migrations
                     b.HasIndex("CompanyId");
 
                     b.ToTable("Placements");
-                });
-
-            modelBuilder.Entity("AssociateTracker.Models.Associate", b =>
-                {
-                    b.HasOne("AssociateTracker.Models.Placement", "Placement")
-                        .WithMany()
-                        .HasForeignKey("PlacementId");
-
-                    b.Navigation("Placement");
                 });
 
             modelBuilder.Entity("AssociateTracker.Models.Placement", b =>

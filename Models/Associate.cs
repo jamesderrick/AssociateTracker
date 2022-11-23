@@ -15,6 +15,8 @@ namespace AssociateTracker.Models
 		[Required]
 		[Display(Name = "Surname")]
 		public string LastName { get; set; }
+
+		public Placement? Placement { get; set; }
 	}
 }
 

@@ -33,7 +33,7 @@
             <tr>
                 <td>@associate.Id</td>
                 <td>@associate.FirstName @associate.LastName</td>
-                <td></td>
+                <td>@associate.Placement?.Company.CompanyName</td>
                 <td class="text-end">
                     <div class="w-50 btn-group">
                         <a asp-controller="Associate" asp-action="Edit" asp-route-id="@associate.Id" class="btn btn-primary mx-2 w-50">

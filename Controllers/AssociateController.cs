@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AssociateTracker.Data;
 using AssociateTracker.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,7 +22,10 @@ namespace AssociateTracker.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Associate> associatesList = _db.Associates;
+            IEnumerable<Associate> associatesList = _db.Associates
+                    .Include(a => a.Placement)
+                    .ThenInclude(p => p.Company)
+                    .ToList();
             return View(associatesList);
         }
 
