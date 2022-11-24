@@ -9,9 +9,11 @@ namespace AssociateTracker.Models
 		public int Id { get; set; }
 
         [Required]
+        [Display(Name = "Company")]
         public string CompanyName { get; set; }
 
-		public bool IsActive { get; set; }
+        [Display(Name = "Status")]
+        public bool IsActive { get; set; } = true;
 
 	}
 }

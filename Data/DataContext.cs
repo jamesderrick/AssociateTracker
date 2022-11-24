@@ -16,12 +16,6 @@ namespace AssociateTracker.Data
         public DbSet<Placement> Placements { get; set; }
         public DbSet<Company> Companies { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Company>()
-                .Property(c => c.IsActive)
-                .HasDefaultValue(true);
-        }
     }
     
 }
