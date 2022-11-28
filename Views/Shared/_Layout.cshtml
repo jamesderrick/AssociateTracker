@@ -24,22 +24,27 @@
                 </button>
             </div>
             <ul class="list-unstyled px-2">
-                <li class="@(ViewData["Title"] == "Home Page" ? "active" : "") ">
+                <li class="@(ViewData["Title"]?.ToString() == "Home Page" ? "active" : "") ">
                     <a asp-area="" asp-controller="Home" asp-action="Index" class="text-decoration-none px-3 py-2 d-block" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
                         <i class="bi-house"></i> Home
                     </a>
                 </li>
-                <li class="@(ViewData["Title"] == "Associates" ? "active" : "") ">
+                <li class="@(ViewData["Title"]?.ToString() == "Associates" ? "active" : "") ">
                     <a asp-area="" asp-controller="Associate" asp-action="Index" class="text-decoration-none px-3 py-2 d-block" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
                         <i class="bi-people"></i> Associates
                     </a>
                 </li>
-                <li class="@(ViewData["Title"] == "Companies" ? "active" : "") ">
+                <li class="@(ViewData["Title"]?.ToString() == "Companies" ? "active" : "") ">
                     <a asp-area="" asp-controller="Company" asp-action="Index" class="text-decoration-none px-3 py-2 d-block" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
                         <i class="bi-building"></i> Companies
                     </a>
                 </li>
-                <li class="@(ViewData["Title"] == "Privacy Policy" ? "active" : "") ">
+                <li class="@(ViewData["Title"]?.ToString() == "Placements" ? "active" : "") ">
+                    <a asp-area="" asp-controller="Placement" asp-action="Index" class="text-decoration-none px-3 py-2 d-block" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Dashboard">
+                        <i class="bi-geo"></i> Placements
+                    </a>
+                </li>
+                <li class="@(ViewData["Title"]?.ToString() == "Privacy Policy" ? "active" : "") ">
                     <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none px-3 py-2 d-block" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Orders">
                         <i class="bi-key"></i> Privacy
                     </a>

@@ -1,0 +1,44 @@
+﻿@model Placement
+@{
+    ViewData["Title"] = "Edit Placement";
+}
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2>Edit Associate</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Company"></label>
+            <select id="CompanyId" name="CompanyId" asp-items="@ViewBag.Company" class="form-control">
+                <option value="0">Select a company...</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Associate"></label>
+            <select id="AssociateId" name="AssociateId" asp-items="@ViewBag.Associate" class="form-control">
+                <option value="0">Select an associate...</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label asp-for="StartDate"></label>
+            <input asp-for="StartDate" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="EndDate"></label>
+            <input asp-for="EndDate" class="form-control" />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a asp-controller="Placement" asp-action="Index" class="btn btn-secondary">
+            Back To List
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

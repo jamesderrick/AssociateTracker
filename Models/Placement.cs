@@ -11,8 +11,14 @@ namespace AssociateTracker.Models
 
 		public Company Company { get; set; }
 
-		public DateTime StartDate { get; set; }
+		public Associate Associate { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Start Date")]
+        public DateTime StartDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
     }
 }

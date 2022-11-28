@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AssociateTracker.Models
 {
@@ -16,7 +17,8 @@ namespace AssociateTracker.Models
 		[Display(Name = "Surname")]
 		public string LastName { get; set; }
 
-		public Placement? Placement { get; set; }
+        [ForeignKey("PlacementId")]
+        public Placement? Placement { get; set; }
 	}
 }
 

@@ -45,7 +45,7 @@ namespace AssociateTracker.Migrations
 
                     b.HasIndex("PlacementId");
 
-                    b.ToTable("Associates");
+                    b.ToTable("Associates", (string)null);
                 });
 
             modelBuilder.Entity("AssociateTracker.Models.Company", b =>
@@ -65,7 +65,7 @@ namespace AssociateTracker.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("AssociateTracker.Models.Placement", b =>
@@ -89,7 +89,7 @@ namespace AssociateTracker.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Placements");
+                    b.ToTable("Placements", (string)null);
                 });
 
             modelBuilder.Entity("AssociateTracker.Models.Associate", b =>
