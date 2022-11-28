@@ -13,20 +13,17 @@ namespace AssociateTracker.Controllers
 {
     public class AssociateController : Controller
     {
-        private readonly DataContext _db;
+        private readonly IAssociateService _associateService;
 
-        public AssociateController(DataContext db)
+        public AssociateController(IAssociateService associateService)
         {
-            _db = db;
+            _associateService = associateService;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Associate> associatesList = _db.Associates
-                    .Include(a => a.Placement)
-                    .ThenInclude(p => p.Company)
-                    .ToList();
-            return View(associatesList);
+            var associates = _associateService.All();
+            return View(associates);
         }
 
         public IActionResult Create()
@@ -39,22 +36,18 @@ namespace AssociateTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Associates.Add(associate);
-                _db.SaveChanges();
-                TempData["success"] = "Associate added successfully";
-                return RedirectToAction("Index");
+                if (_associateService.Create(associate))
+                {
+                    TempData["success"] = "Associate added successfully";
+                    return RedirectToAction("Index");
+                }
             }
             return View(associate);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if(id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var associate = _db.Associates.Find(id);
+            var associate = _associateService.ById(id);
             if(associate == null)
             {
                 return NotFound();
@@ -67,22 +60,18 @@ namespace AssociateTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Associates.Update(associate);
-                _db.SaveChanges();
-                TempData["success"] = "Associate updated successfully";
-                return RedirectToAction("Index");
+                if (_associateService.Update(associate))
+                {
+                    TempData["success"] = "Associate updated successfully";
+                    return RedirectToAction("Index");
+                }
             }
             return View(associate);
         }
 
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var associate = _db.Associates.Find(id);
+            var associate = _associateService.ById(id);
             if (associate == null)
             {
                 return NotFound();
@@ -90,20 +79,19 @@ namespace AssociateTracker.Controllers
             return View(associate);
         }
 
-        [HttpPost,ActionName("Delete")]
-        public IActionResult DeleteAssociate(int? id)
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteAssociate(int id)
         {
-            var associate = _db.Associates.Find(id);
-            if(associate == null)
+            var associate = _associateService.ById(id);
+            if (associate == null)
             {
                 return NotFound();
             }
 
-            _db.Associates.Remove(associate);
-            _db.SaveChanges();
+            _associateService.Delete(associate);
             TempData["success"] = "Associate deleted successfully";
             return RedirectToAction("Index");
-         
+
         }
     }
 }

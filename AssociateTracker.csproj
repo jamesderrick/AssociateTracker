@@ -16,12 +16,14 @@
     <None Remove="Views\Associate\" />
     <None Remove="Views\Company\" />
     <None Remove="Views\Placement\" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Views\Associate\" />
     <Folder Include="Views\Company\" />
     <Folder Include="Views\Placement\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
