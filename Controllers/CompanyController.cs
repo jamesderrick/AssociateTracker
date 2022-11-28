@@ -1,22 +1,23 @@
 ﻿using System;
 using AssociateTracker.Data;
 using AssociateTracker.Models;
+using AssociateTracker.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AssociateTracker.Controllers
 {
 	public class CompanyController : Controller
 	{
-        private readonly DataContext _db;
+        private readonly ICompanyService _companyService;
 
-        public CompanyController(DataContext db)
+        public CompanyController(ICompanyService companyService)
         {
-            _db = db;
+            _companyService = companyService;
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Company> companiesList = _db.Companies.ToList();
+            IEnumerable<Company> companiesList = _companyService.All();
             return View(companiesList);
         }
 
@@ -30,22 +31,18 @@ namespace AssociateTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Companies.Add(company);
-                _db.SaveChanges();
-                TempData["success"] = "Company added successfully";
-                return RedirectToAction("Index");
+                if (_companyService.Create(company))
+                {
+                    TempData["success"] = "Company added successfully";
+                    return RedirectToAction("Index");
+                }
             }
             return View(company);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-
-            var company = _db.Companies.Find(id);
+            var company = _companyService.ById(id);
             if (company == null)
             {
                 return NotFound();
@@ -58,10 +55,11 @@ namespace AssociateTracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _db.Companies.Update(company);
-                _db.SaveChanges();
-                TempData["success"] = "Associate updated successfully";
-                return RedirectToAction("Index");
+                if (_companyService.Update(company))
+                {
+                    TempData["success"] = "Associate updated successfully";
+                    return RedirectToAction("Index");
+                }
             }
             return View(company);
         }

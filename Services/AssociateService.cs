@@ -39,25 +39,25 @@ namespace AssociateTracker.Services
         {
             List<Associate> associatesList = _db.Associates
                 .Include(a => a.Placement)
-                .ThenInclude(p => p.Company)
+                .ThenInclude(p => p!.Company)
                 .ToList();
             return associatesList;
         }
 
-        public Associate ById(int id)
+        public Associate? ById(int id)
         {
             var associate = _db.Associates.Find(id);
             return associate;
         } 
     }
-}
 
-public interface IAssociateService
-{
-    bool Create(Associate associate);
-    bool Update(Associate associate);
-    bool Delete(Associate associate);
-    List<Associate> All();
-    Associate ById(int id);
+    public interface IAssociateService
+    {
+        bool Create(Associate associate);
+        bool Update(Associate associate);
+        bool Delete(Associate associate);
+        List<Associate> All();
+        Associate? ById(int id);
+    }
 }
 
