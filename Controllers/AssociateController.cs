@@ -33,6 +33,7 @@ namespace AssociateTracker.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(Associate associate)
         {
             if (ModelState.IsValid)
@@ -57,6 +58,7 @@ namespace AssociateTracker.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit(Associate associate)
         {
             if (ModelState.IsValid)
@@ -81,6 +83,7 @@ namespace AssociateTracker.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteAssociate(int id)
         {
             var associate = _associateService.ById(id);

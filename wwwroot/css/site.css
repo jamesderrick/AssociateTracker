@@ -7,6 +7,12 @@
     min-width: 250px;
     max-width: 250px;
     transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+#main-links {
+    flex: 1;
 }
 
 .content {

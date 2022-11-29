@@ -10,13 +10,13 @@
             <hr />
         </div>
         <div class="mb-3">
-            <label asp-for="Company"></label>
+            <label for="CompanyId">Company</label>
             <select id="CompanyId" name="CompanyId" asp-items="@ViewBag.Company" class="form-control">
                 <option value="0">Select a company...</option>
             </select>
         </div>
         <div class="mb-3">
-            <label asp-for="Associate"></label>
+            <label for="AssociateId">Associate</label>
             <select id="AssociateId" name="AssociateId" asp-items="@ViewBag.Associate" class="form-control">
                 <option value="0">Select an associate...</option>
             </select>

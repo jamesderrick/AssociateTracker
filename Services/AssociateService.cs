@@ -1,6 +1,7 @@
 ﻿using System;
 using AssociateTracker.Data;
 using AssociateTracker.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AssociateTracker.Services
@@ -44,6 +45,31 @@ namespace AssociateTracker.Services
             return associatesList;
         }
 
+        public List<SelectListItem> NotPlaced()
+        {
+            var associates = _db.Associates
+                .Where(a => a.Placement == null)
+                .Select(a => new SelectListItem {
+                    Value = a.Id.ToString(),
+                    Text = a.FirstName + " " + a.LastName
+                })
+                .ToList();
+            return associates;
+        }
+
+        public List<SelectListItem> NotPlaced(int id)
+        {
+            var associates = _db.Associates
+                .Where(a => a.Placement == null || a.Id == id)
+                .Select(a => new SelectListItem {
+                    Value = a.Id.ToString(),
+                    Text = a.FirstName + " " + a.LastName,
+                    Selected = (a.Id == id) ? true : false
+                })
+                .ToList();
+            return associates;
+        }
+
         public Associate? ById(int id)
         {
             var associate = _db.Associates.Find(id);
@@ -57,6 +83,8 @@ namespace AssociateTracker.Services
         bool Update(Associate associate);
         bool Delete(Associate associate);
         List<Associate> All();
+        List<SelectListItem> NotPlaced();
+        List<SelectListItem> NotPlaced(int id);
         Associate? ById(int id);
     }
 }
