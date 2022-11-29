@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AssociateTracker.Data
 {
-	public class DataContext : IdentityDbContext
+	public class DataContext : IdentityDbContext<CustomUser>
 	{
 		public DataContext(DbContextOptions<DataContext> options) : base(options)
 		{

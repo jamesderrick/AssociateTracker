@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<CustomUser> SignInManager
+@inject UserManager<CustomUser> UserManager
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,10 +84,12 @@
                     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav mb-2 mb-lg-0">
                             @if (SignInManager.IsSignedIn(User))
-                            {
+                                {
+                                    CustomUser user = await UserManager.GetUserAsync(User);
+                                    var fullName = $"{user.FirstName} {user.LastName}";
                                 <li class="nav-item">
                                     <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                                        Hello @UserManager.GetUserName(User)!
+                                        Hello @fullName!
                                     </a>
                                 </li>
                             }
